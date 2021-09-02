@@ -19,17 +19,20 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref } from "vue";
+import useLogin from "@/composables/useLogin";
 
 export default defineComponent({
   setup() {
     const email = ref("");
     const password = ref("");
 
-    const handleSubmit = () => {
-      console.log(email, password);
+    const { errorMessage, login } = useLogin();
+
+    const handleSubmit = async () => {
+      await login(email.value, password.value);
     };
 
-    return { email, password, handleSubmit };
+    return { email, password, handleSubmit, errorMessage };
   },
 });
 </script>

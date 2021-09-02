@@ -21,11 +21,13 @@
       required
       v-model="password"
     />
+    <div class="error">{{ errorMessage }}</div>
     <button>Sign up</button>
   </form>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from "vue";
+import useSignup from "@/composables/useSignup";
 
 export default defineComponent({
   setup() {
@@ -33,11 +35,13 @@ export default defineComponent({
     const email = ref("");
     const password = ref("");
 
-    const handleSubmit = () => {
-      console.log(displayName, email, password);
+    const { signup, errorMessage } = useSignup();
+
+    const handleSubmit = async () => {
+      await signup(email.value, password.value, displayName.value);
     };
 
-    return { displayName, email, password, handleSubmit };
+    return { displayName, email, password, handleSubmit, errorMessage };
   },
 });
 </script>
