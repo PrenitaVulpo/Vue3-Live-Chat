@@ -4,15 +4,26 @@
       <p>hey there</p>
       <p class="email">email</p>
     </div>
-    <button>logout</button>
+    <button @click="handleLogout">logout</button>
   </nav>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
+import useLogout from "@/composables/useLogout";
 
 export default defineComponent({
   setup() {
-    return {};
+    const { logout, errorMessage } = useLogout();
+
+    const handleLogout = async () => {
+      await logout();
+      console.log("dasdsa");
+      if (!errorMessage.value) {
+        console.log("user logged out");
+      }
+    };
+
+    return { handleLogout };
   },
 });
 </script>
