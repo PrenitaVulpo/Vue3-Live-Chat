@@ -23,7 +23,7 @@ import { defineComponent, ref } from "vue";
 import useLogin from "@/composables/useLogin";
 
 export default defineComponent({
-  setup() {
+  setup(props, context) {
     const email = ref("");
     const password = ref("");
 
@@ -32,7 +32,7 @@ export default defineComponent({
     const handleSubmit = async () => {
       await login(email.value, password.value);
       if (!errorMessage.value) {
-        console.log("user loggedIn");
+        context.emit("login");
       }
     };
 
