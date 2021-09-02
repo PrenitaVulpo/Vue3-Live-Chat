@@ -14,6 +14,7 @@
       required
       v-model="password"
     />
+    <div class="error">{{ errorMessage }}</div>
     <button>Log in</button>
   </form>
 </template>
@@ -30,6 +31,9 @@ export default defineComponent({
 
     const handleSubmit = async () => {
       await login(email.value, password.value);
+      if (!errorMessage.value) {
+        console.log("user loggedIn");
+      }
     };
 
     return { email, password, handleSubmit, errorMessage };
