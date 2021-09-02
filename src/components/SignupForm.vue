@@ -30,7 +30,7 @@ import { defineComponent, ref } from "vue";
 import useSignup from "@/composables/useSignup";
 
 export default defineComponent({
-  setup() {
+  setup(props, context) {
     const displayName = ref("");
     const email = ref("");
     const password = ref("");
@@ -39,6 +39,9 @@ export default defineComponent({
 
     const handleSubmit = async () => {
       await signup(email.value, password.value, displayName.value);
+      if (!errorMessage.value) {
+        context.emit("signup");
+      }
     };
 
     return { displayName, email, password, handleSubmit, errorMessage };

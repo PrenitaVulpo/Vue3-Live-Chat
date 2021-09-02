@@ -3,6 +3,7 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   updateProfile,
+  UserCredential,
 } from "firebase/auth";
 import { Ref, ref } from "vue";
 
@@ -13,7 +14,7 @@ interface useSignupReturn {
     email: string,
     password: string,
     displayName: string
-  ) => Promise<void>;
+  ) => Promise<UserCredential | undefined>;
 }
 
 const errorStatus = ref(null);
@@ -38,6 +39,8 @@ const signup = async (email: string, password: string, displayName: string) => {
     await updateProfile(response.user, { displayName: displayName });
     errorStatus.value = null;
     errorMessage.value = null;
+
+    return response;
   } catch (error) {
     errorStatus.value = error.code;
     errorMessage.value = error.message;

@@ -11,7 +11,7 @@
     <div v-else>
       <h2>Sign up</h2>
 
-      <SignupForm />
+      <SignupForm @login="enterChat" />
       <p>
         No account yet? <span @click="showLogin = true">Log ip</span> instead
       </p>
