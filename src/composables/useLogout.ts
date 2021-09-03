@@ -2,7 +2,7 @@ import { app } from "@/firebase/config";
 import { getAuth, signOut } from "firebase/auth";
 import { Ref, ref } from "vue";
 
-interface useLogoutReturn {
+interface useLogoutInterface {
   errorStatus: Ref<null | number>;
   errorMessage: Ref<null | string>;
   logout: () => Promise<void>;
@@ -28,7 +28,7 @@ const logout = async () => {
   }
 };
 
-const useLogout = (): useLogoutReturn => {
+const useLogout = (): useLogoutInterface => {
   return { errorStatus, errorMessage, logout };
 };
 
