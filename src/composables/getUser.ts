@@ -7,6 +7,7 @@ interface getUserInterface {
   errorStatus: Ref<null | number>;
   errorMessage: Ref<null | string>;
   currentUser: Ref<null | User>;
+  getCurrentUser: () => Promise<void>;
 }
 
 const errorStatus = ref(null);
@@ -25,8 +26,26 @@ const authStateStatus = async () => {
   });
 };
 
+const getCurrentUser = async () => {
+  await onAuthStateChanged(auth, (user) => {
+    if (user) {
+      console.log("user is logged in");
+      currentUser.value = user;
+      return currentUser;
+    } else {
+      console.log("user is logged out");
+    }
+  });
+};
+
 const getUser = (): getUserInterface => {
-  return { authStateStatus, errorStatus, errorMessage, currentUser };
+  return {
+    authStateStatus,
+    errorStatus,
+    errorMessage,
+    currentUser,
+    getCurrentUser,
+  };
 };
 
 export default getUser;

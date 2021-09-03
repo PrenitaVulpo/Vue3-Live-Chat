@@ -2,7 +2,7 @@
   <nav>
     <div>
       <p>hey there</p>
-      <p class="email">email</p>
+      <p class="email">{{ currentUser.email }}</p>
     </div>
     <button @click="handleLogout">logout</button>
   </nav>
@@ -10,10 +10,15 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import useLogout from "@/composables/useLogout";
+import getUser from "@/composables/getUser";
 
 export default defineComponent({
   setup() {
     const { logout, errorMessage } = useLogout();
+    const { currentUser, authStateStatus } = getUser();
+
+    authStateStatus();
+    console.log(currentUser.value);
 
     const handleLogout = async () => {
       await logout();
@@ -23,7 +28,7 @@ export default defineComponent({
       }
     };
 
-    return { handleLogout };
+    return { handleLogout, currentUser };
   },
 });
 </script>
