@@ -20,6 +20,8 @@ export default defineComponent({
     authStateStatus();
     console.log(currentUser.value);
 
+    // /dashdsahdashkdsahkh
+
     const handleLogout = async () => {
       await logout();
       console.log("dasdsa");
