@@ -2,9 +2,9 @@
   <nav>
     <div>
       <p>hey there</p>
-      <p class="email">{{ currentUser.email }}</p>
+      <p v-if="currentUser" class="email">{{ currentUser.email }}</p>
     </div>
-    <button @click="handleLogout">logout</button>
+    <button v-if="currentUser" @click="handleLogout">logout</button>
   </nav>
 </template>
 <script lang="ts">
@@ -15,9 +15,8 @@ import getUser from "@/composables/getUser";
 export default defineComponent({
   setup() {
     const { logout, errorMessage } = useLogout();
-    const { currentUser, authStateStatus } = getUser();
+    const { currentUser } = getUser();
 
-    authStateStatus();
     console.log(currentUser.value);
 
     const handleLogout = async () => {
