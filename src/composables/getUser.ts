@@ -1,6 +1,6 @@
 import { Ref, ref } from "vue";
-import { getAuth, onAuthStateChanged, User } from "firebase/auth";
-import { app } from "@/firebase/config";
+import { onAuthStateChanged, User } from "firebase/auth";
+import { auth } from "@/firebase/config";
 
 interface getUserInterface {
   errorStatus: Ref<null | number>;
@@ -10,7 +10,6 @@ interface getUserInterface {
 
 const errorStatus = ref(null);
 const errorMessage = ref(null);
-const auth = getAuth(app);
 const currentUser = ref<User | null>(auth.currentUser);
 
 onAuthStateChanged(auth, (user) => {
