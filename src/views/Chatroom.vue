@@ -10,7 +10,8 @@ import Navbar from "@/components/Navbar.vue";
 export default defineComponent({
   components: { Navbar },
   setup() {
-    return {};
+    const fodder = null;
+    return { fodder };
   },
 });
 </script>
