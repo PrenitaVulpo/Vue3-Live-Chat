@@ -4,14 +4,24 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, watch } from "vue";
 import Navbar from "@/components/Navbar.vue";
+import getUser from "@/composables/getUser";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   components: { Navbar },
   setup() {
-    const fodder = null;
-    return { fodder };
+    const { currentUser } = getUser();
+    const router = useRouter();
+
+    watch(currentUser, () => {
+      if (!currentUser.value) {
+        router.push({ name: "Welcome" });
+      }
+    });
+
+    return { currentUser };
   },
 });
 </script>
