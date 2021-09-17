@@ -5,7 +5,7 @@ import "@/assets/main.css";
 import { auth } from "@/firebase/config";
 import { onAuthStateChanged } from "@firebase/auth";
 
-let app: any = null;
+let app: unknown = null;
 
 onAuthStateChanged(auth, () => {
   if (!app) {
